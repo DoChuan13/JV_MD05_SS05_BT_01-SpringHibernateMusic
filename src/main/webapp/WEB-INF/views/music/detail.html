@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<html lang="en">
+<head th:insert="music/layout.html :: css">
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<h1>Edit Music</h1>
+<a th:href="@{/}">Back</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Single</th>
+        <th>Category</th>
+        <th>File</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr>
+        <td th:text="${music.id}"></td>
+        <td>
+            <a th:text="${music.name}" th:href="@{/music/detail/{id}(id=${music.id})}"></a>
+        </td>
+        <td th:text="${music.singer}"></td>
+        <td th:text="${music.category}"></td>
+        <td>
+            <audio controls>
+                <source th:src="@{'/files/'+${music.file}}" type="audio/mpeg">
+            </audio>
+        </td>
+        <td>
+            <a th:href="@{/music/edit/{id}(id=${music.id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/music/delete/{id}(id=${music.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

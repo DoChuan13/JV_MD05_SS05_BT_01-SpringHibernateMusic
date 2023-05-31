@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<html lang="en">
+<head th:insert="music/layout.html :: css">
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<h1>Edit Music</h1>
+<a th:href="@{/}">Back</a>
+<a th:href="@{/}">Back</a>
+<form th:action="@{/music/edit}" method="post" enctype="multipart/form-data">
+    <table border="1">
+        <tr>
+            <th hidden>ID</th>
+            <th>Name</th>
+            <th>Single</th>
+            <th>Category</th>
+            <th>File</th>
+            <th>Action</th>
+        </tr>
+        <tr th:object="${music}">
+            <td hidden>
+                <input type="text" th:field="*{id}">
+            </td>
+            <td>
+                <input type="text" th:field="*{name}">
+            </td>
+            <td>
+                <input type="text" th:field="*{singer}">
+            </td>
+            <td>
+                <input type="text" th:field="*{category}">
+            </td>
+            <td>
+                <audio controls>
+                    <source th:src="@{'/files/'+${src}}" type="audio/mpeg">
+                </audio>
+                <input type="file" th:field="*{file}" oninput="previewFile()">
+            </td>
+            <td>
+                <button type="submit">Edit</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
+<script>
+
+    function previewFile() {
+        let file = document.querySelector('input[type=file]').files[0];
+        let preview = document.querySelector('source');
+        let reader = new FileReader();
+        console.log(file)
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            console.log("Heheh")
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+</script>
+</body>
+</html>

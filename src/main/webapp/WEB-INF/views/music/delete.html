@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Delete Music</h1>
+<a th:href="@{/}">Back</a>
+<form th:action="@{/music/delete/{id}(id=${music.id})}" method="post" >
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Single</th>
+            <th>Category</th>
+            <th>File</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr>
+            <td th:text="${music.id}"></td>
+            <td th:text="${music.name}"></td>
+            <td th:text="${music.singer}"></td>
+            <td th:text="${music.category}"></td>
+            <td>
+                <audio controls>
+                    <source th:src="@{'/files/'+${music.file}}" type="audio/mpeg">
+                </audio>
+            </td>
+            <td>
+                <button type="submit">Delete</button>
+            </td>
+            <td>
+                <a th:href="@{/}"><button type="button">Cancel</button></a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
